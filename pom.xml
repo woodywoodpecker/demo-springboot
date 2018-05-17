@@ -6,10 +6,12 @@
     <groupId>com.py4j</groupId>
     <artifactId>demo-springboot-module</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <!-- 多module下，这个pom文件的打包方式需要指定为pom -->
     <packaging>pom</packaging>
 
     <modules>
         <module>demo-springboot-service</module>
+        <module>demo-springboot-security</module>
         <module>demo-springboot-application</module>
     </modules>
 
