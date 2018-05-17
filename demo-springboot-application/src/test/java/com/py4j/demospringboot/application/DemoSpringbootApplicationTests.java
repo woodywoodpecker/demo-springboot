@@ -1,4 +1,4 @@
-package com.py4j.demospringboot;
+package com.py4j.demospringboot.application;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
