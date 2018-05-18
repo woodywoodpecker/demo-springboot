@@ -11,7 +11,7 @@
 
     <modules>
         <module>demo-springboot-service</module>
-        <module>demo-springboot-security</module>
+        <!--<module>demo-springboot-security</module>-->
         <module>demo-springboot-application</module>
     </modules>
 
