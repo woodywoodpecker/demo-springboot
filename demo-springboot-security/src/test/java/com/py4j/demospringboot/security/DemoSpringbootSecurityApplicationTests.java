@@ -11,6 +11,7 @@ public class DemoSpringbootSecurityApplicationTests {
 
     @Test
     public void contextLoads() {
+        System.out.println("to test...");
     }
 
 }
