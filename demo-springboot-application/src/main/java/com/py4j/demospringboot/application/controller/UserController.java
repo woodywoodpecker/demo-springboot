@@ -1,7 +1,7 @@
 package com.py4j.demospringboot.application.controller;
 
-import com.py4j.demospringboot.application.CustomerRepository;
 import com.py4j.demospringboot.application.po.Customer;
+import com.py4j.demospringboot.application.repository.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
