@@ -7,10 +7,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.validation.Valid;
 
 /**
  * @Author Warren
@@ -26,7 +29,7 @@ public class BookController {
     @Autowired
     private BookRepository bookRepository;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping
     public String getBookList(ModelMap map) {
         map.addAttribute("bookList",bookRepository.findAll());
         return "bookList";
@@ -40,7 +43,13 @@ public class BookController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createBookForm(@ModelAttribute Book book) {
+    public String createBookForm(@Valid @ModelAttribute Book book, BindingResult bindingResult , ModelMap map) {
+        if (bindingResult.hasErrors()) {
+            map.addAttribute("book", book);
+            map.addAttribute("action", "create");
+            return "bookForm";
+        }
+
         bookRepository.save(book);
         return "redirect:/book";
     }
@@ -63,7 +72,13 @@ public class BookController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String putBook(@ModelAttribute Book book) {
+    public String putBook(@Valid @ModelAttribute Book book,BindingResult bindingResult, ModelMap map) {
+        if (bindingResult.hasErrors()) {
+            map.addAttribute("book", book);
+            map.addAttribute("action", "update");
+            return "bookForm";
+        }
+
         bookRepository.save(book);
         return "redirect:/book";
     }

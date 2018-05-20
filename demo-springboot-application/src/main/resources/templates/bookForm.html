@@ -43,6 +43,7 @@
                 <textarea class="form-control" id="book_introduction" rows="3" name="introduction"
                           th:value="${book.introduction}" th:field="*{book.introduction}"></textarea>
                 </div>
+                <div th:if="${#fields.hasErrors('book.introduction')}" th:errors="*{book.introduction}" class="col-xs-4"></div>
             </div>
 
             <div class="form-group">
