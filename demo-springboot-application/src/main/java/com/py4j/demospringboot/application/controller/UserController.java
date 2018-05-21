@@ -1,75 +1,38 @@
 package com.py4j.demospringboot.application.controller;
 
-import com.py4j.demospringboot.application.po.Customer;
-import com.py4j.demospringboot.application.repository.CustomerRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.py4j.demospringboot.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
-    private final Logger mLogger = LoggerFactory.getLogger(UserController.class);
-
     @Autowired
-    private CustomerRepository customerRepository;
+    private UserService userService;
 
     @GetMapping("/all")
     public Object getAllCustomers () {
-        return customerRepository.findAll();
+        return userService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Object getCustomerById (@PathVariable String id) {
-        return customerRepository.findById(Long.valueOf(id));
+    public Object getCustomerById (@PathVariable Long id) {
+        return userService.findById(id);
     }
 
     @PostMapping("/{name}/{email}")
-    public Object addCustomer (@PathVariable String name,@PathVariable String email) {
-        Customer c = new Customer();
-        c.setName(name);
-        c.setEmail(email);
-        try {
-            customerRepository.save(c);
-        } catch (Exception e) {
-            mLogger.error("",e);
-            return false;
-        }
-        return true;
+    public Object addCustomer (@PathVariable String email, @PathVariable String name) {
+        return userService.save(name,email);
     }
 
     @DeleteMapping("/{id}")
-    public Object delCustomer (@PathVariable String id) {
-        try {
-            customerRepository.deleteById(Long.valueOf(id));
-        } catch (Exception e) {
-            mLogger.error("",e);
-            return false;
-        }
-        return true;
+    public Object delCustomer (@PathVariable Long id) {
+        return userService.deleteById(id);
     }
 
     @PutMapping("/{id}/{name}/{email}")
-    public Object updateCustomer (@PathVariable String id,@PathVariable String name,@PathVariable String email) {
-        Optional<Customer> optional = customerRepository.findById(Long.valueOf(id));
-        if (!optional.isPresent()) {
-            mLogger.warn("[UserController] [updateCustomer] => no customer found by id {}",id);
-            return false;
-        }
-        Customer customer = optional.get();
-        customer.setName(name);
-        customer.setEmail(email);
-        customerRepository.save(customer);
-        try {
-            customerRepository.save(customer);
-        } catch (Exception e) {
-            mLogger.error("",e);
-            return false;
-        }
-        return true;
+    public Object updateCustomer (@PathVariable Long id, @PathVariable String name,@PathVariable String email) {
+        return userService.save(id,name,email);
     }
 }

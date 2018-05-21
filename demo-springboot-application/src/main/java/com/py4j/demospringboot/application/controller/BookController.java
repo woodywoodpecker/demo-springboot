@@ -62,10 +62,6 @@ public class BookController {
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String getUser(@PathVariable Long id, ModelMap map) {
-        /*
-            bookRepository.findById(id).get();
-            这个地方可能出坑，在前端的thymeleaf操作bean的value的时候，是调用bean的Getter/Setter方法完成的
-         */
         map.addAttribute("book", bookService.findById(id));
         map.addAttribute("action", "update");
         return "bookForm";
