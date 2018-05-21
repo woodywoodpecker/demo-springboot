@@ -1,7 +1,7 @@
 package com.py4j.demospringboot.application.controller;
 
 import com.py4j.demospringboot.application.po.Book;
-import com.py4j.demospringboot.application.repository.BookRepository;
+import com.py4j.demospringboot.application.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +26,12 @@ public class BookController {
 
     private final Logger mLogger = LoggerFactory.getLogger(BookController.class);
 
-    @Autowired
-    private BookRepository bookRepository;
+    @Autowired()
+    private BookService bookService;
 
     @RequestMapping
     public String getBookList(ModelMap map) {
-        map.addAttribute("bookList",bookRepository.findAll());
+        map.addAttribute("bookList",bookService.findAll());
         return "bookList";
     }
 
@@ -50,13 +50,13 @@ public class BookController {
             return "bookForm";
         }
 
-        bookRepository.save(book);
+        bookService.save(book);
         return "redirect:/book";
     }
 
     @RequestMapping(value = "/delete/{bookId}", method = RequestMethod.GET)
     public String deleteBook (@PathVariable Long bookId) {
-        bookRepository.deleteById(bookId);
+        bookService.deleteById(bookId);
         return "redirect:/book";
     }
 
@@ -66,7 +66,7 @@ public class BookController {
             bookRepository.findById(id).get();
             这个地方可能出坑，在前端的thymeleaf操作bean的value的时候，是调用bean的Getter/Setter方法完成的
          */
-        map.addAttribute("book", bookRepository.findById(id).get());
+        map.addAttribute("book", bookService.findById(id));
         map.addAttribute("action", "update");
         return "bookForm";
     }
@@ -79,7 +79,7 @@ public class BookController {
             return "bookForm";
         }
 
-        bookRepository.save(book);
+        bookService.save(book);
         return "redirect:/book";
     }
 }
