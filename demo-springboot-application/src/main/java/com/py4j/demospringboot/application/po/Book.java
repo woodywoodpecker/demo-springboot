@@ -1,5 +1,7 @@
 package com.py4j.demospringboot.application.po;
 
+import com.py4j.demospringboot.application.annotaion.KeyWordValidator;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +23,7 @@ public class Book {
 
     private String name;
 
+    @KeyWordValidator(values = {"毛泽东"} , message = "{KeyWordValidator.book.writer}")
     private String writer;
 
     @NotNull

@@ -35,6 +35,7 @@
                     <input type="text" class="form-control" id="book_writer" name="writer" th:value="${book.writer}"
                            th:field="*{book.writer}"/>
                 </div>
+                <div th:if="${#fields.hasErrors('book.writer')}" th:errors="*{book.writer}" class="col-xs-4"></div>
             </div>
 
             <div class="form-group">
