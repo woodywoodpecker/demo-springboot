@@ -1,5 +1,6 @@
 package com.py4j.demospringboot.application.service.impl;
 
+import com.py4j.demospringboot.application.jms.BookContentJmsService;
 import com.py4j.demospringboot.application.po.Book;
 import com.py4j.demospringboot.application.repository.BookRepository;
 import com.py4j.demospringboot.application.service.BookService;
@@ -22,6 +23,9 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
+    private BookContentJmsService mBookContentJmsService;
+
     @Override
     public Iterable<Book> findAll() {
         return bookRepository.findAll();
@@ -36,6 +40,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book save(Book book) {
         bookRepository.save(book);
+        mBookContentJmsService.prepareBookInventory(book);
         return book;
     }
 
