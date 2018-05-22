@@ -30,6 +30,14 @@ public class Book {
     @Size(min=5)
     private String introduction;
 
+    public Book() { }
+
+    public Book(String pName, String pWriter, @NotNull @Size(min = 5) String pIntroduction) {
+        name = pName;
+        writer = pWriter;
+        introduction = pIntroduction;
+    }
+
     public long getId() {
         return id;
     }
