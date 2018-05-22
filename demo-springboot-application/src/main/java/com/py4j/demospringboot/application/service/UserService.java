@@ -1,6 +1,9 @@
 package com.py4j.demospringboot.application.service;
 
 import com.py4j.demospringboot.application.po.Customer;
+import com.py4j.demospringboot.application.po.GithubUser;
+
+import java.util.List;
 
 public interface UserService {
 
@@ -13,4 +16,6 @@ public interface UserService {
     boolean save (long id,String name,String email);
 
     boolean deleteById(long id);
+
+    List<GithubUser> getGithubUsers (int number);
 }

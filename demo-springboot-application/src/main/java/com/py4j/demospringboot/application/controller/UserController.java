@@ -35,4 +35,9 @@ public class UserController {
     public Object updateCustomer (@PathVariable Long id, @PathVariable String name,@PathVariable String email) {
         return userService.save(id,name,email);
     }
+
+    @GetMapping("/github/{number}")
+    public Object getGithubUsers (@PathVariable Integer number) {
+        return userService.getGithubUsers(number);
+    }
 }
