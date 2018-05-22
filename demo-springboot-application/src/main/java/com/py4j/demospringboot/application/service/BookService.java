@@ -6,7 +6,7 @@ public interface BookService {
 
     Iterable<Book> findAll();
 
-    void save (Book book);
+    Book save (Book book);
 
     void deleteById(long id);
 
