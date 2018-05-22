@@ -3,3 +3,9 @@ spring.jpa.hibernate.ddl-auto:create----每次运行该程序，没有表格会�
 spring.jpa.hibernate.ddl-auto:create-drop----每次程序结束的时候会清空表
 spring.jpa.hibernate.ddl-auto:update----每次运行程序，没有表格会新建表格，表内有数据不会清空，只会更新
 spring.jpa.hibernate.ddl-auto:validate----运行程序会校验数据与数据库的字段类型是否相同，不同会报错
+
+controller里面返回view里面一定不能在前面带 / 否则 mvn package出来的jar或者war包在运行的是时候，会出下面这个错误
+{{org.thymeleaf.exceptions.TemplateInputException: Error resolving template "/home", template might not exist or might not
+be accessible by any of the configured Template Resolvers}}
+
+
