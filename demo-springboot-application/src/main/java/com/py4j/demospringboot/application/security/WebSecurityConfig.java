@@ -53,6 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         // 忽略静态资源
         web.ignoring().antMatchers("/druid/**");
+        web.ignoring().antMatchers("/actuator/**");
     }
 
     @Autowired

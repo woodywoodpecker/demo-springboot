@@ -34,3 +34,13 @@ spring:
     restart:
       additional-paths: demo-springboot-application/src/main/java
       exclude: demo-springboot-application/src/main/resources/**
+
+management:
+  server:
+    port: 9090
+  endpoints:
+    web:
+      cors:
+        allow-credentials: false
+      exposure:
+        include: "*"
